@@ -23,6 +23,7 @@ public class Menu {
         logic = new ParseStringLogic(command);
         invoker = new CommandInvoker(new FindCommand(logic), new LSCommand(logic));
         chooser();
+        run();
     }
 
     private String parse(String string){
@@ -45,6 +46,7 @@ public class Menu {
             invoker.findByInvoker();
         }else if(parseCommand.equals("ls")){
             invoker.LSByInvoker();
+
         }else{
             System.out.println(">> No such command");
             run();

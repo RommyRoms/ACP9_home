@@ -2,16 +2,15 @@ package week2;
 
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
+//реализация логики команды find
 public class Finder {
     private String command;
     private String path1 = "C:/";
     private String path2 = "D:/";
     private String fileOrDirectoryName;
     private String[] commandSignature;
+    private final String ALERT = "WRONG COMMAND";
 
     public Finder(String command) {
         this.command = command;
@@ -20,6 +19,7 @@ public class Finder {
     private String makeArgumentForSearching(){
         return commandSignature[1];
     }
+
 
     private int size(){
         int size = 0;
@@ -30,6 +30,8 @@ public class Finder {
         }
         return size;
     }
+
+    //choose method to operate with command;
     public void chooseMethodToFind(){
         if (size()==2){
             if (commandSignature[1].equals("help")){
@@ -39,11 +41,13 @@ public class Finder {
             }
         }else if (size()==3){
             findWithUserRoot();
+        }else{
+            System.out.println(ALERT);
         }
 
     }
 
-
+//find <fileName> realization
     private void find() {
         fileOrDirectoryName = makeArgumentForSearching();
         File file1 = new File(path1);
@@ -73,14 +77,14 @@ public class Finder {
             }
         }
     }
-
+//find <fileName> [directory] realization
     private void findWithUserRoot(){
         File file = new File(commandSignature[2]);
         System.out.println(">> start searching in "+ commandSignature[2]+ " ...");
         search(file);
         System.out.println(">> end searching");
     }
-
+//help realization
     private String help(){
         String result = " command type: find \n " +
                 "performs 3 kinds of signature: \n " +

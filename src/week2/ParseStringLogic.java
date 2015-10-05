@@ -22,6 +22,6 @@ public class ParseStringLogic {
         new Finder(string).chooseMethodToFind();
     }
     public void LScommand(){
-        new LSMaker(string).showPosition();
+        new LSMaker(string).choose();
     }
 }
