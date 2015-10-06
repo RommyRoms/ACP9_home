@@ -4,37 +4,25 @@ package week2;
 import java.io.File;
 
 //реализация логики команды find
-public class Finder {
-    private String command;
+public class Finder extends StringParser{
     private String path1 = "C:/";
     private String path2 = "D:/";
     private String fileOrDirectoryName;
-    private String[] commandSignature;
-    private final String ALERT = "WRONG COMMAND";
 
     public Finder(String command) {
-        this.command = command;
-        commandSignature = command.split(" ");
+        super(command);
     }
+
     private String makeArgumentForSearching(){
-        return commandSignature[1];
+        return getFromSignature(1);
     }
 
-
-    private int size(){
-        int size = 0;
-        for (int i = 0; i <commandSignature.length ; i++) {
-            if (commandSignature[i]!=null){
-                size++;
-            }
-        }
-        return size;
-    }
 
     //choose method to operate with command;
-    public void chooseMethodToFind(){
+    @Override
+    public void choose(){
         if (size()==2){
-            if (commandSignature[1].equals("help")){
+            if (getFromSignature(1).equals("help")) {
                 System.out.println(help());
             }else{
                 find();
@@ -77,15 +65,19 @@ public class Finder {
             }
         }
     }
+
 //find <fileName> [directory] realization
     private void findWithUserRoot(){
-        File file = new File(commandSignature[2]);
-        System.out.println(">> start searching in "+ commandSignature[2]+ " ...");
+        fileOrDirectoryName = makeArgumentForSearching();
+        File file = new File(getFromSignature(2));
+        System.out.println(">> start searching in "+ getFromSignature(2)+ " ...");
         search(file);
         System.out.println(">> end searching");
     }
+
 //help realization
-    private String help(){
+    @Override
+    public String help(){
         String result = " command type: find \n " +
                 "performs 3 kinds of signature: \n " +
                 "find <fileName> \n " +

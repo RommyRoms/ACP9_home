@@ -19,9 +19,17 @@ public class ParseStringLogic {
     }
 
     public void findCommand(){
-        new Finder(string).chooseMethodToFind();
+        new Finder(string).choose();
     }
-    public void LScommand(){
+
+    public void LSCommand(){
         new LSMaker(string).choose();
+    }
+    public void CDCommand(){
+        new CDMaker(string).choose();
+    }
+
+    public void contentCommand(){
+        new ContentMaker(string).choose();
     }
 }

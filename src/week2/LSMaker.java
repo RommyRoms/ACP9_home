@@ -5,38 +5,24 @@ import java.io.File;
 
 
 /**
- * реализация логики команды ls;
- * TODO: !!!!!!!!!!!!Вынести работу со строками в абстарктный класс и унаследовать все обработчики команд от него
- * TODO:   чтобы забрать и не повторять распарсивание строки каджый раз снова!!!!!!!!!!!!!!!!!!!!!!!!!!
+ * СЂРµР°Р»РёР·Р°С†РёСЏ Р»РѕРіРёРєРё РєРѕРјР°РЅРґС‹ ls;
  */
-public class LSMaker {
-    private String command;
-    private String[] commandSignature;
-    private final String ALERT = "WRONG COMMAND";
-    public static final String LOCATION = "D:/";
+public class LSMaker extends StringParser{
+
+
 
     public LSMaker(String command) {
-        this.command = command;
-        commandSignature = command.split(" ");
-
+        super(command);
     }
 
-    private int size(){
-        int size = 0;
-        for (int i = 0; i <commandSignature.length ; i++) {
-            if (commandSignature[i]!=null){
-                size++;
-            }
-        }
-        return size;
-    }
+    @Override
     public void choose(){
         if (size()==2){
-            if (commandSignature[1].equals("help")){
+            if (getFromSignature(1).equals("help")){
                 System.out.println(help());
-            }else if (commandSignature[1].equals("dir")) {
+            }else if (getFromSignature(1).equals("dir")) {
                 System.out.println(showDirs());
-            }else if (commandSignature[1].equals("f")){
+            }else if (getFromSignature(1).equals("f")){
                 System.out.println(showFiles());
             }else{
                 System.out.println(ALERT);
@@ -51,13 +37,17 @@ public class LSMaker {
     //show files in directory with command ls;
     private String showPosition(){
         StringBuilder builder = new StringBuilder();
-        File file = new File(LOCATION);
+        File file = new File(location);
         File[] list = file.listFiles();
-        for (File f : list) {
-            if (f.isDirectory()) {
-                builder.append(f.getName() + "/    ");
-            }else{
-                builder.append(f.getName()+ "    ");
+        if (list!=null){
+            for (File f : list) {
+                if (f!=null){
+                    if (f.isDirectory()) {
+                        builder.append(f.getName() + "/    \n");
+                    }else{
+                        builder.append(f.getName()+ "    \n");
+                    }
+                }
             }
         }
         return builder.toString();
@@ -65,11 +55,11 @@ public class LSMaker {
 //show directories realization
     private String showDirs(){
         StringBuilder builder = new StringBuilder();
-        File file = new File(LOCATION);
+        File file = new File(location);
         File[] list = file.listFiles();
         for (File f : list) {
             if (f.isDirectory()) {
-                builder.append(f.getName() + "/    ");
+                builder.append(f.getName() + "/  \n");
             }
         }
         return builder.toString();
@@ -77,18 +67,19 @@ public class LSMaker {
 //show files realization
     private String showFiles(){
         StringBuilder builder = new StringBuilder();
-        File file = new File(LOCATION);
+        File file = new File(location);
         File[] list = file.listFiles();
         for (File f : list) {
             if (!f.isDirectory()) {
-                builder.append(f.getName() + "    ");
+                builder.append(f.getName() + " \n");
             }
         }
         return builder.toString();
     }
 
     //help realization
-    private String help(){
+    @Override
+    public String help(){
         String result = " command type: ls \n " +
                 "performs 3 kinds of signature: \n " +
                 "ls  \n " +
