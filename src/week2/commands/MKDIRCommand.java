@@ -2,15 +2,16 @@ package week2.commands;
 
 import week2.ParseStringLogic;
 
-public class CDCommand implements Command {
+
+public class MKDIRCommand implements Command{
     ParseStringLogic logic;
 
-    public CDCommand(ParseStringLogic logic) {
+    public MKDIRCommand(ParseStringLogic logic) {
         this.logic = logic;
     }
 
     @Override
     public void execute() {
-        logic.cdCommand();
+        logic.mkdirCommand();
     }
 }

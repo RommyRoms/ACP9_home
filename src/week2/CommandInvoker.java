@@ -15,12 +15,15 @@ public class CommandInvoker {
     Command lsCommand;
     Command cdCommand;
     Command contentCommand;
+    Command mkdirCommand;
 
-    public CommandInvoker(Command findCommand, Command lsCommand, Command cdCommand, Command contentCommand) {
+    public CommandInvoker(Command findCommand, Command lsCommand, Command cdCommand,
+                          Command contentCommand, Command mkdirCommand) {
         this.findCommand = findCommand;
         this.lsCommand = lsCommand;
         this.cdCommand = cdCommand;
         this.contentCommand = contentCommand;
+        this.mkdirCommand = mkdirCommand;
     }
 
     public void findByInvoker(){
@@ -37,5 +40,9 @@ public class CommandInvoker {
 
     public void contentByInvoker(){
         contentCommand.execute();
+    }
+
+    public void  mkdirByInvoker(){
+        mkdirCommand.execute();
     }
 }

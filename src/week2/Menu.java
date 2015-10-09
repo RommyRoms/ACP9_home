@@ -1,15 +1,12 @@
 package week2;
 
 
-import week2.commands.CDCommand;
-import week2.commands.ContentCommand;
-import week2.commands.FindCommand;
-import week2.commands.LSCommand;
+import week2.commands.*;
 
 import java.util.NoSuchElementException;
 
 public class Menu {
-    public static final String allCommands = "find, ls, cd, content, ";
+    public static final String allCommands = "find, ls, cd, content,mkdir ";
     private ParseStringLogic logic;
     private CommandInvoker invoker;
     String command;
@@ -29,7 +26,8 @@ public class Menu {
         invoker = new CommandInvoker(new FindCommand(logic),
                                         new LSCommand(logic),
                                             new CDCommand(logic),
-                                                new ContentCommand(logic));
+                                                new ContentCommand(logic),
+                                                    new MKDIRCommand(logic));
         chooser();
         run();
     }
@@ -58,6 +56,8 @@ public class Menu {
             invoker.CDByInvoker();
         }else if(parseCommand.equals("content")) {
             invoker.contentByInvoker();
+        }else if(parseCommand.equals("mkdir")) {
+            invoker.mkdirByInvoker();
         }else{
             System.out.println(">> No such command");
             run();

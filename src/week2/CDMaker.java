@@ -2,6 +2,8 @@ package week2;
 
 
 import java.io.File;
+import java.util.regex.Pattern;
+import java.util.Arrays;
 
 public class CDMaker extends StringParser {
 
@@ -17,7 +19,7 @@ public class CDMaker extends StringParser {
         int size = size();
         if (size==2){
             if (getFromSignature(1).equals("..")){
-                cdBack();
+                cdBack() ;
             }else{
                 cdUp();
             }
@@ -41,18 +43,24 @@ public class CDMaker extends StringParser {
 
     private void cdBack(){
         File file = new File(location);
-        int size = 0;
-        String[] path = file.getAbsolutePath().split("/");
-        for (int i = 0; i <path.length ; i++) {
-            size++;
-        }
+        int counts = 0;
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i <path.length-1 ; i++) {
-            builder.append(path[i]+ "/");
+        String[] path = file.getAbsolutePath().split(Pattern.quote("\\"));
+        for (int i = 0; i <path.length ; i++) {
+            counts++;
         }
-        location = builder.toString().substring(builder.length()-1);
+        if  (counts >1){
+            for (int i = 0; i <path.length-1 ; i++) {
+                builder.append(path[i] + "/");
+                location = builder.toString().substring(0,builder.toString().length()-1);
+            }
+        }else{
+            location = ROOT_DIRECTORY;
+            System.out.println((">> you are in root directory. Can`t go back"));
+        }
 
     }
+
 
 
     @Override

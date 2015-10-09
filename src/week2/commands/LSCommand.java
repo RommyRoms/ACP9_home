@@ -1,7 +1,6 @@
 package week2.commands;
 
 import week2.ParseStringLogic;
-import week2.commands.Command;
 
 /**
  * Класс, который отвечает за отработку и функционал комманды ls,
@@ -18,6 +17,6 @@ public class LSCommand implements Command {
 
     @Override
     public void execute() {
-        logic.LSCommand();
+        logic.lsCommand();
     }
 }

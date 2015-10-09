@@ -22,14 +22,19 @@ public class ParseStringLogic {
         new Finder(string).choose();
     }
 
-    public void LSCommand(){
+    public void lsCommand(){
         new LSMaker(string).choose();
     }
-    public void CDCommand(){
+
+    public void cdCommand(){
         new CDMaker(string).choose();
     }
 
     public void contentCommand(){
         new ContentMaker(string).choose();
+    }
+
+    public void mkdirCommand(){
+        new MKDIRMaker(string).choose();
     }
 }
