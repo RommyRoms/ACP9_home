@@ -89,7 +89,6 @@ public class ChatServer {
                     tellEveryone(message);
                 }
             }catch (NoSuchElementException ex){
-//                ex.printStackTrace(); умышленно ловим этот runtime exception и игнорим его stacktrace
             }
         }
     }
